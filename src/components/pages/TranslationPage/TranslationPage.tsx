@@ -24,11 +24,13 @@ export const TranslationPage: React.FC = () => {
         setValidation(null);
         setParsedRegex(null);
         setTranslation('');
+
         return;
       }
 
       try {
         const parsed = regexParser(regex);
+
         setParsedRegex(parsed);
         setValidation(Validation.VALID);
         setTranslation(translateRegex(regex));

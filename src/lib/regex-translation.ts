@@ -62,10 +62,12 @@ export const translateRegex = (regexString: string): string => {
   }
 
   let translatedPattern = applyBasicTranslations(cleanPattern);
+
   translatedPattern = handleCharacterSets(translatedPattern);
   translatedPattern = handleNegatedCharacterSets(translatedPattern);
 
   const alternationResult = handleAlternation(translatedPattern, explanation);
+
   if (alternationResult) {
     return alternationResult;
   }
@@ -114,6 +116,7 @@ const applyBasicTranslations = (pattern: string): string => {
   for (const { pattern: regexPattern, explanation } of REGEX_TRANSLATIONS) {
     const escapedPattern = regexPattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(escapedPattern, 'g');
+
     translatedPattern = translatedPattern.replace(regex, explanation);
   }
 
@@ -125,6 +128,7 @@ const handleCharacterSets = (pattern: string): string => {
     if (chars.includes('-')) {
       return `any character in the range [${chars}]`;
     }
+
     return `any of these characters: ${chars.split('').join(', ')}`;
   });
 };
@@ -141,6 +145,7 @@ const handleAlternation = (pattern: string, explanation: string): string | null 
   }
 
   const parts = pattern.split('|');
+
   if (parts.length === 2) {
     return `${explanation}either "${parts[0].trim()}" or "${parts[1].trim()}"`;
   } else {
