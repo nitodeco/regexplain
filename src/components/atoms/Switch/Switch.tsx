@@ -9,5 +9,5 @@ type SwitchProps = React.ComponentProps<typeof ShadcnSwitch> & {
 };
 
 export const Switch: React.FC<SwitchProps> = ({ className, ...props }) => {
-  return <ShadcnSwitch className={cn('hover:cursor-pointer', className)} {...props} />;
+  return <ShadcnSwitch className={cn('hover:cursor-pointer shadow-sm', className)} {...props} />;
 };
