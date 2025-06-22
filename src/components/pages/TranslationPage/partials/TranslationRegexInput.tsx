@@ -31,6 +31,7 @@ export const TranslationRegexInput: React.FC<Props> = ({
   React.useEffect(() => {
     if (regex.trim() === '') {
       setValidation(null);
+
       return;
     }
 

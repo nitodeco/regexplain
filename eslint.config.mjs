@@ -2,9 +2,9 @@ import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
 import 'eslint-plugin-only-warn';
 import globals from 'globals';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import tseslint from 'typescript-eslint';
 
@@ -52,7 +52,6 @@ export default [
     plugins: {
       '@typescript-eslint': tseslint.plugin,
       '@stylistic': stylistic,
-      'import': importPlugin,
     },
     settings: {
       'import/resolver': {
