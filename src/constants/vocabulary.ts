@@ -2,23 +2,16 @@ import { RegexToken } from '@/types/token';
 
 export const REGEX_TOKEN_VOCABULARY: RegexToken[] = [
   // Phone number patterns
-  { token: '\\d{3}-\\d{3}-\\d{4}', translation: 'a US phone number like 123-456-7890' },
+  { token: '\\d{3}-\\d{3}-\\d{4}', translation: 'phone number format (XXX-XXX-XXXX)' },
   { token: '\\(\\d{3}\\)\\s?\\d{3}-\\d{4}', translation: 'a US phone number like (123) 456-7890' },
   {
     token: '^\\+1[\\s.-]?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$',
     translation: 'a US phone number with country code like +1 (123) 456-7890',
   },
-  {
-    token: '^\\d{3}[\\s.-]?\\d{3}[\\s.-]?\\d{4}$',
-    translation: 'a US phone number with flexible separators like 123.456.7890',
-  },
-  {
-    token: '^\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$',
-    translation: 'a US phone number with optional parentheses like (123) 456-7890',
-  },
+
   {
     token: '^1[\\s.-]?\\d{3}[\\s.-]?\\d{3}[\\s.-]?\\d{4}$',
-    translation: 'a US phone number with leading 1 like 1-123-456-7890',
+    translation: 'an American phone number with country code like 1-123-456-7890',
   },
 
   // International phone patterns
@@ -80,7 +73,7 @@ export const REGEX_TOKEN_VOCABULARY: RegexToken[] = [
   },
   {
     token: '^\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$',
-    translation: 'a Canadian domestic phone number like (416) 123-4567',
+    translation: 'an American phone number with optional parentheses like (123) 456-7890',
   },
 
   // Australian phone numbers
@@ -137,7 +130,7 @@ export const REGEX_TOKEN_VOCABULARY: RegexToken[] = [
     token: '^\\+52[\\s.-]?1?[\\s.-]?\\d{3}[\\s.-]?\\d{3}[\\s.-]?\\d{4}$',
     translation: 'a Mexican phone number like +52 1 123 456 7890',
   },
-  { token: '^\\d{3}[\\s.-]?\\d{3}[\\s.-]?\\d{4}$', translation: 'a Mexican domestic phone like 123 456 7890' },
+  { token: '^\\d{3}[\\s.-]?\\d{3}[\\s.-]?\\d{4}$', translation: 'an American phone number like 123-456-7890' },
 
   // Russian phone numbers
   {
@@ -492,6 +485,9 @@ export const REGEX_TOKEN_VOCABULARY: RegexToken[] = [
   { token: '\\P{L}', translation: 'anything except letters' },
 
   // Specific quantifiers
+  { token: '{3}', translation: 'exactly 3 times' },
+  { token: '{2,}', translation: 'between 2 and 5 times' },
+  { token: '{1,5}', translation: 'between 2 and 5 times' },
   { token: '{n}', translation: 'exactly n times' },
   { token: '{n,}', translation: 'n or more times' },
   { token: '{n,m}', translation: 'between n and m times' },
@@ -503,37 +499,37 @@ export const REGEX_TOKEN_VOCABULARY: RegexToken[] = [
   { token: '{2,5}', translation: 'between 2 and 5 times' },
 
   // Basic character classes
-  { token: '\\d', translation: 'any number (0-9)' },
-  { token: '\\D', translation: 'anything except a number' },
-  { token: '\\w', translation: 'any letter, number, or underscore' },
-  { token: '\\W', translation: 'anything except letters, numbers, or underscores' },
-  { token: '\\s', translation: 'any whitespace (space, tab, etc.)' },
-  { token: '\\S', translation: 'anything except whitespace' },
-  { token: '.', translation: 'any character (except line break)' },
+  { token: '\\d', translation: 'any digit (0-9)' },
+  { token: '\\D', translation: 'any non-digit' },
+  { token: '\\w', translation: 'any word character (letter, digit, or underscore)' },
+  { token: '\\W', translation: 'any non-word character' },
+  { token: '\\s', translation: 'any whitespace character' },
+  { token: '\\S', translation: 'any non-whitespace character' },
+  { token: '.', translation: 'any character except newline' },
 
   // Basic quantifiers
   { token: '+', translation: 'one or more times' },
   { token: '*', translation: 'zero or more times' },
-  { token: '?', translation: 'zero or one time (optional)' },
+  { token: '?', translation: 'zero or once (optional)' },
 
   // Lazy quantifiers
-  { token: '+?', translation: 'one or more times (but as few as possible)' },
-  { token: '*?', translation: 'zero or more times (but as few as possible)' },
-  { token: '??', translation: 'zero or one time (prefer zero)' },
+  { token: '+?', translation: 'one or more times (lazy/non-greedy)' },
+  { token: '*?', translation: 'zero or more times (lazy/non-greedy)' },
+  { token: '??', translation: 'zero or once (lazy/non-greedy)' },
   { token: '{n,m}?', translation: 'between n and m times (but as few as possible)' },
 
   // Possessive quantifiers
-  { token: '++', translation: "one or more times (don't give back matches)" },
-  { token: '*+', translation: "zero or more times (don't give back matches)" },
-  { token: '?+', translation: "zero or one time (don't give back matches)" },
+  { token: '++', translation: 'one or more times (possessive)' },
+  { token: '*+', translation: 'zero or more times (possessive)' },
+  { token: '?+', translation: 'zero or once (possessive)' },
 
   // Anchors
-  { token: '^', translation: 'start of text or line' },
-  { token: '$', translation: 'end of text or line' },
-  { token: '\\A', translation: 'very beginning of text' },
-  { token: '\\Z', translation: 'very end of text' },
-  { token: '\\z', translation: 'absolute end of text' },
-  { token: '\\G', translation: 'where the last match ended' },
+  { token: '^', translation: 'start of string/line' },
+  { token: '$', translation: 'end of string/line' },
+  { token: '\\A', translation: 'start of string (absolute)' },
+  { token: '\\Z', translation: 'end of string (absolute)' },
+  { token: '\\z', translation: 'end of string (absolute, no newline)' },
+  { token: '\\G', translation: 'start of current match' },
 
   // Alternation
   { token: '|', translation: 'or' },
