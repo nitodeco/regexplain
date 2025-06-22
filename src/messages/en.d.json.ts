@@ -3,6 +3,42 @@
 
 declare const messages: {
     "title": "Regexplain",
-    "description": "Regexplain is a tool that translates regular expressions into plain English."
+    "description": "Regexplain is a tool that translates regular expressions into plain English.",
+    "validation": {
+        "valid": "Valid",
+        "invalid": "Invalid",
+        "waiting": "Waiting"
+    },
+    "header": {
+        "title": "Regexplain",
+        "navigation": {
+            "home": "Home",
+            "tools": "Tools",
+            "about": "About"
+        },
+        "toggleTheme": "Toggle theme"
+    },
+    "footer": {
+        "title": "Regexplain",
+        "copyright": "Copyright © 2025 Nico Möhn - All rights reserved.",
+        "github": "GitHub",
+        "links": {
+            "github": "https://github.com/nitodeco/regexplain"
+        }
+    },
+    "pages": {
+        "translation": {
+            "input": {
+                "title": "Regex",
+                "placeholder": "Enter your regex here",
+                "button": "Explain"
+            },
+            "output": {
+                "title": "Explanation",
+                "placeholder": "Waiting for input...",
+                "invalid": "Invalid regex pattern"
+            }
+        }
+    }
 };
 export default messages;
