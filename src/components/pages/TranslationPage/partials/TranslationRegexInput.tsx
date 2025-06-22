@@ -14,17 +14,17 @@ const WAITING_DELAY = 50;
 type Props = {
   validation: Validation | null;
   regex: string;
-  handleValidate: (e: React.FormEvent) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   setValidation: (validation: Validation | null) => void;
+  validateRegex: () => void;
 };
 
 export const TranslationRegexInput: React.FC<Props> = ({
   validation,
   regex,
-  handleValidate,
   handleInputChange,
   setValidation,
+  validateRegex,
 }) => {
   const t = useTranslations('pages.translation.input');
 
@@ -40,20 +40,14 @@ export const TranslationRegexInput: React.FC<Props> = ({
     }, WAITING_DELAY);
 
     const validationTimer = setTimeout(() => {
-      const syntheticEvent = {
-        preventDefault: () => {},
-        currentTarget: {},
-        target: {},
-      } as React.FormEvent;
-
-      handleValidate(syntheticEvent);
+      validateRegex();
     }, DEBOUNCE_TIME);
 
     return () => {
       clearTimeout(waitingTimer);
       clearTimeout(validationTimer);
     };
-  }, [regex, handleValidate, setValidation]);
+  }, [regex, validateRegex, setValidation]);
 
   return (
     <div className='flex-1 min-w-0 lg:min-w-96'>
