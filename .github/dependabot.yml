@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directories: ['/', '/packages/common', '/apps/web', '/apps/api']
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    allow:
+      - dependency-type: 'direct'
+    ignore:
+      - dependency-name: '@dreifach-ai/*'
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    open-pull-requests-limit: 10
+    versioning-strategy: increase-if-necessary
